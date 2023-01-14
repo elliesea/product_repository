@@ -19,3 +19,5 @@ Route::get('/', function () {
 });
 
 Route::get('/trips', [TripController::class, 'index']);   
+
+Route::get('/', [TripController::class, 'index']);
