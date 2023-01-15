@@ -14,10 +14,7 @@ use App\Http\Controllers\TripController;  //外部にあるTripControllerクラ�
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/trips', [TripController::class, 'index']);   
-
 Route::get('/', [TripController::class, 'index']);
+Route::get('/trips/create', [TripController::class, 'create']);
+Route::get('/trips/{trip}', [TripController::class, 'show']);
+Route::post('/trips', [TripController::class, 'store']);

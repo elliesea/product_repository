@@ -5,7 +5,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\TripRequest;
 use App\Models\Trip;
 
 /**
@@ -17,17 +17,26 @@ use App\Models\Trip;
 
 class TripController extends Controller
 {
-    public function index(Trip $trip) //インポートしたTripをインスタンス化して$tripとして使用。
+    public function index(Trip $trip) 
     {
-        //return $trip->get();   //$tripの中身を戻り値にする。
-        
-        //return view('trips/index')->with(['trips' => $trip->get()]);  
-        //blade内で使う変数'trips'と設定。'trips'の中身にgetを使い、インスタンス化した$tripを代入。
-       
-        //return view('trips/index')->with(['trips' => $trip->getByLimit()]);
-        
         return view('trips/index')->with(['trips' => $trip->getPaginateByLimit()]);
-        //getPaginateByLimit()はTrip.phpで定義したメソッドです。
+    }
+
+    public function show(Trip $trip)
+    {
+        return view('trips/show')->with(['trip' => $trip]);
+    }
+    
+    public function create()
+    {
+        return view('trips/create');
+    }
+    
+    public function store(Trip $trip, TripRequest $request)
+    {
+        $input = $request['trip'];
+        $trip->fill($input)->save();
+        return redirect('/trips/' . $trip->id);
     }
 }
 
