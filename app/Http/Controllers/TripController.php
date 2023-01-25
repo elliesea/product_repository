@@ -19,7 +19,7 @@ class TripController extends Controller
 {
     public function index(Trip $trip) 
     {
-        return view('trips/index')->with(['trips' => $trip->getPaginateByLimit()]);
+        return view('trips/index')->with(['trips' => $trip->getPaginateByLimit(5)]);
     }
 
     public function show(Trip $trip)
@@ -32,10 +32,23 @@ class TripController extends Controller
         return view('trips/create');
     }
     
-    public function store(Trip $trip, TripRequest $request)
+    public function store(TripRequest $request, Trip $trip)
     {
         $input = $request['trip'];
         $trip->fill($input)->save();
+        return redirect('/trips/' . $trip->id);
+    }
+    
+    public function edit(Trip $trip)
+    {
+        return view('trips/edit')->with(['trip' => $trip]);
+    }
+    
+    public function update(TripRequest $request, Trip $trip)
+    {
+        $input_trip = $request['trip'];
+        $trip->fill($input_trip)->save();
+
         return redirect('/trips/' . $trip->id);
     }
 }
