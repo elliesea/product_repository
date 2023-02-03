@@ -13,8 +13,12 @@
         </h1>
         <div class="content">
             <div class="content__trip">
-                <h3>本文</h3>
-                <p class='body'>{{ $trip->body }}</p>    
+                <h3>Schedule</h3>
+                <p class="schedule">{{ $trip->schedule }}</p>
+                <h3>Subtitle</h3>
+                <p class="subtitle">{{ $trip->subtitle}}</p> 
+                <h3>body</h3>
+                <p class="body">{{ $trip->body }}</p>    
             </div>
         </div>
         <div class="edit">

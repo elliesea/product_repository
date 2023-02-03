@@ -4,16 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Trip extends Model
 {
     use HasFactory;
+    use SoftDeletes;
     
-    public function getByLimit(int $limit_count = 5)
-    {
-        // updated_atで降順に並べたあと、limitで件数制限をかける
-        return $this->orderBy('updated_at', 'DESC')->limit($limit_count)->get();
-    }
     
     public function getPaginateByLimit(int $limit_count = 5)
     {
@@ -23,6 +20,8 @@ class Trip extends Model
     
     protected $fillable = [
         'title',
+        'schedule',
+        'subtitle',
         'body',
     ];
 }

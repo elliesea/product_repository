@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TripController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TripController;  //外部にあるTripControllerクラスをインポート。
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,10 +16,25 @@ use App\Http\Controllers\TripController;  //外部にあるTripControllerクラ�
 |
 */
 
-Route::get('/', [TripController::class, 'index']);
-Route::get('/trips/create', [TripController::class, 'create']);
-Route::get('/trips/{trip}', [TripController::class, 'show']);
-Route::post('/trips', [TripController::class, 'store']);
 
-Route::get('/trips/{trip}/edit', [TripController::class, 'edit']);
-Route::put('/trips/{trip}', [TripController::class, 'update']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::controller(TripController::class)->middleware(['auth'])->group(function(){
+    Route::get('/', 'index')->name('index');
+    Route::post('/trips', 'store')->name('store');
+    Route::get('/trips/create', 'create')->name('create');
+    Route::get('/trips/{trip}', 'show')->name('show');
+    Route::put('/trips/{trip}', 'update')->name('update');
+    Route::delete('/trips/{trip}', 'delete')->name('delete');
+    Route::get('/trips/{trip}/edit', 'edit')->name('edit');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';

@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('trips', function (Blueprint $table) {
-            $table->id();  //$table->データの型('カラム名')
-            $table->integer('user_id');
-            $table->string('title', 50);
-            $table->text('body');
+        Schema::create('articles', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
     }
 
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('trips');
+        Schema::dropIfExists('articles');
     }
 };

@@ -25,6 +25,8 @@ class TripRequest extends FormRequest
     {
         return [
             'trip.title' => 'required|string|max:100',
+            'trip.schedule' => 'required|string|max:4000',
+            'trip.subtitle' => 'required|string|max:4000',
             'trip.body' => 'required|string|max:4000',
         ];
     }

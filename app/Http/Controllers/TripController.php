@@ -5,15 +5,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\TripRequest;
 use App\Models\Trip;
 
-/**
- * Trip一覧を表示する
- * 
- * @param Trip Tripモデル
- * @return array Tripモデルリスト
- */
+
 
 class TripController extends Controller
 {
@@ -32,7 +28,7 @@ class TripController extends Controller
         return view('trips/create');
     }
     
-    public function store(TripRequest $request, Trip $trip)
+    public function store(Trip $trip, TripRequest $request)
     {
         $input = $request['trip'];
         $trip->fill($input)->save();
@@ -48,8 +44,14 @@ class TripController extends Controller
     {
         $input_trip = $request['trip'];
         $trip->fill($input_trip)->save();
-
+        
         return redirect('/trips/' . $trip->id);
+    }
+    
+    public function delete(Trip $trip)
+    {
+        $trip->delete();
+        return redirect('/');
     }
 }
 
