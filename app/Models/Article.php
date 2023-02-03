@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     use HasFactory;
+    
+    public function trip(){
+        return $this->belongsTo(Trip::class);
+    }
+    
+    protected $fillable = [
+        'trip_id',
+        'subtitle',
+        'body',
+    ];
 }

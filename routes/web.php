@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TripController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +29,14 @@ Route::controller(TripController::class)->middleware(['auth'])->group(function()
     Route::put('/trips/{trip}', 'update')->name('update');
     Route::delete('/trips/{trip}', 'delete')->name('delete');
     Route::get('/trips/{trip}/edit', 'edit')->name('edit');
+});
+
+Route::controller(ArticleController::class)->middleware(['auth'])->group(function(){
+    Route::post('/articles', 'store')->name('store');
+    Route::get('/articles/create/{trip}', 'create');
+    Route::put('/articles/{article}', 'update')->name('update');
+    Route::delete('/articles/{article}', 'delete')->name('delete');
+    Route::get('/articles/{article}/edit', 'edit')->name('edit');
 });
 
 Route::middleware('auth')->group(function () {

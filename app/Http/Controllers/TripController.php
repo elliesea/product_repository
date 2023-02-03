@@ -8,7 +8,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\TripRequest;
 use App\Models\Trip;
-
+use App\Models\Article;
 
 
 class TripController extends Controller
@@ -28,10 +28,12 @@ class TripController extends Controller
         return view('trips/create');
     }
     
-    public function store(Trip $trip, TripRequest $request)
+    public function store(Trip $trip, Article $article, TripRequest $request)
     {
         $input = $request['trip'];
         $trip->fill($input)->save();
+        $input += ['trip_id' => $trip->id];
+        $article->fill($input)->save();
         return redirect('/trips/' . $trip->id);
     }
     
