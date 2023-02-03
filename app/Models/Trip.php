@@ -21,7 +21,9 @@ class Trip extends Model
     protected $fillable = [
         'title',
         'schedule',
-        'subtitle',
-        'body',
     ];
+    
+    public function articles(){
+        return $this->hasMany(Article::class);
+    }
 }

@@ -11,14 +11,22 @@
         <h1 class="title">
             {{ $trip->title }}
         </h1>
+        <a href='/articles/create/{{$trip->id}}'>記事を作成</a>
         <div class="content">
             <div class="content__trip">
                 <h3>Schedule</h3>
                 <p class="schedule">{{ $trip->schedule }}</p>
-                <h3>Subtitle</h3>
-                <p class="subtitle">{{ $trip->subtitle}}</p> 
-                <h3>body</h3>
-                <p class="body">{{ $trip->body }}</p>    
+                @foreach ($trip->articles as $article)
+                    <div class='trip'>
+                            <h2 class='title'>サブタイトル名:{{ $article->subtitle }}</h2>
+                            <p class ="body">本文:{{ $article->body }}</p>
+                        <form action="/trips/{{ $article->id }}" id="form_{{ $article->id }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="button" onclick="deleteTrip({{ $article->id }})">delete</button> 
+                        </form>
+                    </div>
+                @endforeach
             </div>
         </div>
         <div class="edit">
