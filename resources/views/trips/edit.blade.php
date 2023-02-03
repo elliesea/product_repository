@@ -14,9 +14,17 @@
                 <h2>Title</h2>
                 <input type="text" name="trip[title]" value="{{ $trip->title }}"/> 
             </div>
+            <div class="content_schedule">
+                <h2>Schedule</h2>
+                <input type="schedule" name="trip[schedule]" value="{{ $trip->schedule }}"/> 
+            </div>
+            <div class="content_subtitle">
+                <h2>SubTitle</h2>
+                <input type="text" name="trip[subtitle]" value="{{ $trip->subtitle }}"/> 
+            </div> 
             <div class="content_body">
                 <h2>Body</h2>
-                <input type='text' name='trip[body]' value="{{ $trip->body }}">
+                <input type="body" name='trip[body]' value="{{ $trip->body }}">
             </div>
             <input type="submit" value="update"/>
         </form>
