@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TripRequest extends FormRequest
+class ArticleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class TripRequest extends FormRequest
     public function rules()
     {
         return [
-            'trip.title' => 'required|string|max:100',
-            'trip.schedule' => 'required|string|max:4000',
+            'article.subtitle' => 'required|string|max:4000',
+            'article.body' => 'required|string|max:4000',
         ];
     }
 }

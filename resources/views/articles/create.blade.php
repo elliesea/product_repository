@@ -24,7 +24,7 @@
             
             <input type="submit" value="store"/>
         </form>
-        <div class="back">[<a href="/">back</a>]</div>
+        <div class="back">[<a href="/trips/{{$trip->id}}">back</a>]</div>
     </body>
     </x-app-layout>
 </html>
