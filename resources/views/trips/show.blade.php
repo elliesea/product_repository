@@ -11,7 +11,7 @@
         <h1 class="title">
             {{ $trip->title }}
         </h1>
-        <a href='/articles/create/{{$trip->id}}'>記事を作成</a>
+        <a href='/articles/create/{{$trip->id}}'>記事の追加</a>
         <div class="content">
             <div class="content__trip">
                 <h3>Schedule</h3>
@@ -20,10 +20,13 @@
                     <div class='trip'>
                             <h2 class='title'>サブタイトル名:{{ $article->subtitle }}</h2>
                             <p class ="body">本文:{{ $article->body }}</p>
-                        <form action="/trips/{{ $article->id }}" id="form_{{ $article->id }}" method="POST">
+                        <form action="/articles/{{ $article->id }}" id="form_{{ $article->id }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="button" onclick="deleteTrip({{ $article->id }})">delete</button> 
+                            <div class="edit">
+                                <a href="/articles/{{ $article->id }}/edit">記事編集</a>
+                            </div>
                         </form>
                     </div>
                 @endforeach
@@ -35,6 +38,15 @@
         <div class="footer">
             <a href="/">戻る</a>
         </div>
+        <script>
+            function deleteTrip(id) {
+            'use strict'
+
+            if (confirm('削除すると復元できません。\n本当に削除しますか？')) {
+                document.getElementById(`form_${id}`).submit();
+            }
+        }
+        </script>
     </body>
 </html>
 

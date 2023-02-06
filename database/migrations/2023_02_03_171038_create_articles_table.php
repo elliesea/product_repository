@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('subtitle', 50);
             $table->string('body', 500);
             $table->foreignId('trip_id')->constrained();
+            $table->softDeletes();
         });
     }
 
